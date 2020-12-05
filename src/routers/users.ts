@@ -39,8 +39,14 @@ export default class UsersController {
   static async deleteUser(ctx: IRouterContext, next: () => Promise<void>): Promise<void> {
     const db = DB.getInstance();
     const isDeleted = await db.deleteUser(ctx.params.id);
-    console.log(isDeleted);
+
     assert(isDeleted, 500, 'UsersController.deleteUser')
+    //assert is only if there is an error 
+    // the if is to check if the user is deleted or not (don't exists)
+    if (!isDeleted) {
+      ctx.status = 404;
+      return;
+    }
     ctx.status = 204;
     await next();
   }
