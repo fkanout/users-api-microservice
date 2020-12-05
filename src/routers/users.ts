@@ -29,7 +29,6 @@ export default class UsersController {
   }
 
 
-
   static async getUser(ctx: IRouterContext, next: () => Promise<void>): Promise<void> {
     const db = DB.getInstance();
     const user = await db.getUser(ctx.params.id);

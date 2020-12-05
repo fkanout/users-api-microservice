@@ -1,6 +1,7 @@
 import Router from 'koa-router';
 import validate, { Joi } from 'koa-router-joi-validation';
 import { hashPassword } from '../middleware';
+import onlyFromSwiss from '../middleware/onlyFromSwiss';
 import UserController from './users';
 
 const genericRouter = new Router();
@@ -19,6 +20,7 @@ router.post(
       address: Joi.string().required(),
     },
   }),
+  onlyFromSwiss,
   hashPassword,
   UserController.createUser
 )
