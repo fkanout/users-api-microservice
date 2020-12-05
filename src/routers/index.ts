@@ -1,4 +1,5 @@
 import Router from 'koa-router';
+import validate, { Joi } from 'koa-router-joi-validation';
 import hashPasswordWithSalt from '../middleware/hashPasswordWithSalt';
 import UserController from './users';
 
@@ -8,11 +9,69 @@ const router = new Router({
 });
 
 // Resources router, which could be protected & behind a base URL prefix 
-router.post('/users', hashPasswordWithSalt, UserController.createUser)
-router.get('/users', UserController.getUsers)
-router.get('/users/:id', UserController.getUser)
-router.patch('/users/:id', UserController.updateUser)
-router.delete('/users/:id', UserController.deleteUser)
+router.post(
+  '/users',
+  validate({
+    body: {
+      email: Joi.string().email().required(),
+      firstName: Joi.string().required(),
+      password: Joi.string().required(),
+      address: Joi.string().required(),
+    },
+  }),
+  hashPasswordWithSalt,
+  UserController.createUser
+)
+
+router.get(
+  '/users',
+  validate({
+    query: {
+      email: Joi.string().email(),
+      firstName: Joi.string(),
+      address: Joi.string()
+    }
+  }),
+  UserController.getUsers
+)
+
+router.get(
+  '/users/:id',
+  validate({
+    params: {
+      id: Joi.string().guid({ version: 'uuidv4' }).required(),
+    }
+  }),
+  UserController.getUser
+)
+
+
+router.patch(
+  '/users/:id',
+  validate({
+    params: {
+      id: Joi.string().guid({ version: 'uuidv4' }).required(),
+    },
+    body: {
+      email: Joi.string().email(),
+      firstName: Joi.string(),
+      address: Joi.string()
+    }
+  }),
+  UserController.updateUser
+)
+
+
+
+router.delete(
+  '/users/:id',
+  validate({
+    params: {
+      id: Joi.string().guid({ version: 'uuidv4' }).required(),
+    }
+  }),
+  UserController.deleteUser
+)
 
 // Generic/Service router.
 genericRouter.get('/healthCheck', async (ctx, next) => {

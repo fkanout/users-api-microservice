@@ -53,6 +53,7 @@
     "koa-bodyparser": "^4.3.0",
     "koa-helmet": "^6.0.0",
     "koa-router": "^10.0.0",
+    "koa-router-joi-validation": "^1.2.2",
     "pg": "^8.5.1"
   }
 }

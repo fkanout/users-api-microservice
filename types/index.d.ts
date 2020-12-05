@@ -11,3 +11,11 @@ interface IConfig {
   USERS_API_PREFIX: string | undefined;
   DB: IDBConfig
 }
+
+
+declare module 'koa-router-joi-validation' {
+  export { default as Joi } from '@hapi/joi';
+  export default
+    function validate(ctx: IRouterContext);
+
+}
