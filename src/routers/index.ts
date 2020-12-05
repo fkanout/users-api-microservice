@@ -1,4 +1,5 @@
 import Router from 'koa-router';
+import hashPasswordWithSalt from '../middleware/hashPasswordWithSalt';
 import UserController from './users';
 
 const genericRouter = new Router();
@@ -7,7 +8,7 @@ const router = new Router({
 });
 
 // Resources router, which could be protected & behind a base URL prefix 
-router.post('/users', UserController.createUser)
+router.post('/users', hashPasswordWithSalt, UserController.createUser)
 router.get('/users', UserController.getUsers)
 router.get('/users/:id', UserController.getUser)
 router.patch('/users/:id', UserController.updateUser)

@@ -1,5 +1,3 @@
-
-
 interface IDBConfig {
   HOST: string | undefined,
   USER_NAME: string | undefined,

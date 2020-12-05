@@ -3,6 +3,7 @@ dotenv.config();
 import CONFIG from './src/config';
 
 interface KnexConfig {
+  //TODO: define any.
   [key: string]: any;
 }
 const kenxConfig: KnexConfig = {

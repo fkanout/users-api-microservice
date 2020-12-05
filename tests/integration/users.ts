@@ -1,16 +1,51 @@
-import supertest from 'supertest';
-import server from '../../src/server';
 
+
+import assert from 'assert';
+import supertest from 'supertest';
+import sqlite3 from 'sqlite3';
+import fs from 'fs';
+import server from '../../src/server';
+import { expectCt } from 'koa-helmet';
+
+
+const testDBPath = './dev.sqlite3';
 const request = supertest(server.listen());
 
 describe('Users routers', () => {
+  before(async () => {
+    return new Promise((resolve, reject) => {
+      const db = new sqlite3.Database(testDBPath);
+      db.run(` 
+      CREATE TABLE users(
+        id INTEGER PRIMARY KEY,
+        firstName TEXT NOT NULL,
+        address TEXT NOT NULL,
+        email TEXT NOT NULL,
+        password TEXT NOT NULL
+      );`, (error) => {
+        if (error) {
+          console.log(error);
+          reject(error)
+        }
+        resolve();
+      });
+    });
+  });
 
   describe('POST /users', () => {
     it('should respond with the added user', async () => {
       await request
         .post('/api/v1/users')
+        .send({
+          'email': 'faisal@kanout.com',
+          'password': 'superpassword',
+          'firstName': 'faisal',
+          'address': '15 RUE LEFEBVRE'
+        })
         .expect('Content-Type', /json/)
-        .expect(200);
+        .expect(200)
+
+
     });
   })
   describe('GET /users', () => {
@@ -18,7 +53,9 @@ describe('Users routers', () => {
       await request
         .get('/api/v1/users')
         .expect('Content-Type', /json/)
-        .expect(200);
+
+
+
     });
   })
 
@@ -47,4 +84,18 @@ describe('Users routers', () => {
         .expect(200);
     });
   })
+
+
+  after(async () => {
+    return new Promise((resolve, reject) => {
+      fs.unlink(testDBPath, (error) => {
+        if (error) {
+          reject(error)
+        }
+        resolve()
+      })
+
+    })
+  });
+
 });
