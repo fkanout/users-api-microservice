@@ -9,7 +9,7 @@ export default class Publisher {
   private static instance: Publisher;
   static client: redis.RedisClient;
 
-  static getInstance() {
+  static getInstance(): Publisher {
     if (!Publisher.instance) {
       Publisher.client = redis.createClient({
         host: CONFIG.REDIS.HOST,
@@ -21,13 +21,13 @@ export default class Publisher {
     return Publisher.instance;
   }
 
-  publishUser(user: User, requestId: string) {
+  publishUser(user: User | undefined, requestId: string): void {
     const payload = {
       requestId,
       ...user
     }
+    //F&F Fire and Forget
     Publisher.client.publish('user', JSON.stringify(payload));
-
   }
 
 }

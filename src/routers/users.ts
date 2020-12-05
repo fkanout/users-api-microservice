@@ -1,6 +1,7 @@
 import { IRouterContext } from 'koa-router';
 import DB from '../db';
 import { User } from '../db/models/user';
+import { Publisher } from '../services';
 
 export default class UsersController {
 
@@ -17,6 +18,8 @@ export default class UsersController {
     const createdUser = await db.createUser(user);
     ctx.assert(createdUser, 500, 'Error - UsersController.createUser');
     ctx.body = createdUser;
+    const pub = Publisher.getInstance();
+    pub.publishUser(createdUser, ctx.state.requestId);
     await next();
   }
 
@@ -41,13 +44,18 @@ export default class UsersController {
     const db = DB.getInstance();
     const isDeleted = await db.deleteUser(ctx.params.id);
     ctx.assert(isDeleted, 500, 'UsersController.deleteUser')
-    //assert is only if there is an error 
+    // assert is only if there is an error 
     // the if is to check if the user is deleted or not (don't exists)
     if (!isDeleted) {
       ctx.status = 404;
       return;
     }
     ctx.status = 204;
+    const pub = Publisher.getInstance();
+    const deletedUser: User = {
+      id: ctx.params.id
+    }
+    pub.publishUser(deletedUser, ctx.state.requestId);
     await next();
   }
 
@@ -58,6 +66,8 @@ export default class UsersController {
     const updatedUser = await db.updateUser(userData, ctx.params.id);
     ctx.assert(updatedUser, 500, 'Error - UsersController.updateUser');
     ctx.body = updatedUser;
+    const pub = Publisher.getInstance();
+    pub.publishUser(updatedUser, ctx.state.requestId);
     await next();
   }
 
