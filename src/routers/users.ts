@@ -19,14 +19,16 @@ export default class UsersController {
     ctx.assert(createdUser, 500, 'Error - UsersController.createUser');
     ctx.body = createdUser;
     await next();
-
   }
+
 
   static async getUsers(ctx: IRouterContext, next: () => Promise<void>): Promise<void> {
     const db = DB.getInstance();
     ctx.body = await db.getUsers(ctx.query);
     await next();
   }
+
+
 
   static async getUser(ctx: IRouterContext, next: () => Promise<void>): Promise<void> {
     const db = DB.getInstance();
@@ -36,10 +38,10 @@ export default class UsersController {
     await next();
   }
 
+
   static async deleteUser(ctx: IRouterContext, next: () => Promise<void>): Promise<void> {
     const db = DB.getInstance();
     const isDeleted = await db.deleteUser(ctx.params.id);
-
     assert(isDeleted, 500, 'UsersController.deleteUser')
     //assert is only if there is an error 
     // the if is to check if the user is deleted or not (don't exists)
@@ -50,6 +52,7 @@ export default class UsersController {
     ctx.status = 204;
     await next();
   }
+
 
   static async updateUser(ctx: IRouterContext, next: () => Promise<void>): Promise<void> {
     const userData: User = ctx.request.body;
