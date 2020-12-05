@@ -8,6 +8,11 @@ const CONFIG: IConfig = {
     PASSWORD: process.env.USERS_API_DB_PASSWORD,
     DB_NAME: process.env.USERS_API_DB_DB_NAME,
     PORT: process.env.USERS_API_DB_DB_PORT,
+  },
+  REDIS: {
+    HOST: process.env.USERS_API_REDIS_HOST,
+    PORT: parseInt(process.env.USERS_API_REDIS_PORT || '6379'),
+    PASSWORD: process.env.USERS_API_REDIS_PASSWORD,
   }
 }
 export default CONFIG;
