@@ -100,6 +100,21 @@ export default class DB {
     }
   }
 
+  async deleteUser(id: string):
+    Promise<boolean> {
+    try {
+      const deletedUser: boolean =
+        await DB
+          .client(Tables.USERS)
+          .where({ id })
+          .delete();
+      return deletedUser;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  }
+
 }
 
 

@@ -37,6 +37,10 @@ export default class UsersController {
   }
 
   static async deleteUser(ctx: IRouterContext, next: () => Promise<void>): Promise<void> {
+    const db = DB.getInstance();
+    const isDeleted = await db.deleteUser(ctx.params.id);
+    console.log(isDeleted);
+    assert(isDeleted, 500, 'UsersController.deleteUser')
     ctx.status = 204;
     await next();
   }
