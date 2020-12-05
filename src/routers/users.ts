@@ -1,4 +1,3 @@
-import { assert } from 'console';
 import { IRouterContext } from 'koa-router';
 import DB from '../db';
 import { User } from '../db/models/user';
@@ -41,7 +40,7 @@ export default class UsersController {
   static async deleteUser(ctx: IRouterContext, next: () => Promise<void>): Promise<void> {
     const db = DB.getInstance();
     const isDeleted = await db.deleteUser(ctx.params.id);
-    assert(isDeleted, 500, 'UsersController.deleteUser')
+    ctx.assert(isDeleted, 500, 'UsersController.deleteUser')
     //assert is only if there is an error 
     // the if is to check if the user is deleted or not (don't exists)
     if (!isDeleted) {
