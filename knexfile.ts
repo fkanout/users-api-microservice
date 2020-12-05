@@ -2,7 +2,10 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 import CONFIG from './src/config';
 
-export = {
+interface KnexConfig {
+  [key: string]: any;
+}
+const kenxConfig: KnexConfig = {
   test: {
     client: 'sqlite3',
     connection: {
@@ -45,3 +48,5 @@ export = {
   },
 
 };
+
+export default kenxConfig;

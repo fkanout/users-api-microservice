@@ -3,6 +3,7 @@ import { IRouterContext } from 'koa-router';
 export default class UsersController {
 
   static async createUser(ctx: IRouterContext, next: () => Promise<void>): Promise<void> {
+
     ctx.body = {
       handler: 'getUsers'
     }
