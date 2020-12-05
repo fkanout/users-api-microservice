@@ -1,0 +1,21 @@
+{
+  "name": "users-api-microservice",
+  "version": "1.0.0",
+  "description": "For https://www.ricardo.ch/",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon",
+    "dev-inspect": "nodemon --inspect src/index.js",
+    "build": "tsc",
+    "start": "node ./dist",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Faisal Kanout",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.6",
+    "ts-node": "^9.1.0",
+    "typescript": "^4.1.2"
+  }
+}
