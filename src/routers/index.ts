@@ -1,6 +1,6 @@
 import Router from 'koa-router';
 import validate, { Joi } from 'koa-router-joi-validation';
-import hashPasswordWithSalt from '../middleware/hashPasswordWithSalt';
+import { hashPassword } from '../middleware';
 import UserController from './users';
 
 const genericRouter = new Router();
@@ -19,7 +19,7 @@ router.post(
       address: Joi.string().required(),
     },
   }),
-  hashPasswordWithSalt,
+  hashPassword,
   UserController.createUser
 )
 

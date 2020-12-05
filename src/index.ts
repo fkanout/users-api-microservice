@@ -5,6 +5,8 @@ import server from './server'
 import CONFIG from './config';
 
 
-server.listen(CONFIG.USERS_API_PORT, () => console.log('Server is up | Port:', CONFIG.USERS_API_PORT))
+server.listen(
+  CONFIG.USERS_API_PORT,
+  () => console.log('Server is up | Port:', CONFIG.USERS_API_PORT))
 
 

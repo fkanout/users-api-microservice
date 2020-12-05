@@ -32,6 +32,7 @@
     "@types/node": "^14.14.10",
     "@types/sqlite3": "^3.1.6",
     "@types/supertest": "^2.0.10",
+    "@types/uuid": "^8.3.0",
     "@typescript-eslint/eslint-plugin": "^4.9.0",
     "@typescript-eslint/parser": "^4.9.0",
     "chai": "^4.2.0",
@@ -54,6 +55,7 @@
     "koa-helmet": "^6.0.0",
     "koa-router": "^10.0.0",
     "koa-router-joi-validation": "^1.2.2",
-    "pg": "^8.5.1"
+    "pg": "^8.5.1",
+    "uuid": "^8.3.1"
   }
 }
