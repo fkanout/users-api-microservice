@@ -1,4 +1,4 @@
-# User API Microservice
+# Users API Microservice
 This is a web microservice - REST API connected to a relational DB (PostgreSQL). It has been developed to manage users, means, perform **CRUD** operations (Create, Read, Write, Delete).
 
 # Features
