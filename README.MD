@@ -22,7 +22,7 @@ This is a web microservice - REST API connected to a relational DB (PostgreSQL).
 
 
 # Routes (endpoints)
-The routes are exposed behind a version prefix `/api/v1` or via an environment variable.
+The routes are exposed behind a version prefix `/api/v1` (see Environment variables section)
 
 Method | Resource | Description
 --- | --- | ----
