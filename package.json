@@ -7,7 +7,7 @@
     "dev": "nodemon",
     "dev-inspect": "nodemon --inspect src/index.js",
     "build": "tsc",
-    "start": "node ./dist",
+    "start": "node ./dist/src",
     "lint": "eslint . --ext .ts",
     "lint-fix": "eslint . --ext .ts --fix",
     "test": "NODE_ENV=test mocha -r ts-node/register 'tests/**/*.ts' --exit"
