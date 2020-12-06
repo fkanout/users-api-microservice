@@ -2,11 +2,13 @@ import Koa from 'koa';
 import cors from '@koa/cors';
 import helmet from 'koa-helmet';
 import bodyParser from 'koa-bodyparser';
+import logger from 'koa-logger';
 import { requestId, errorHandler } from './middleware'
 import { genericRouter, router } from './routers';
 
 const app = new Koa();
 
+app.use(logger());
 app.use(errorHandler());
 app.use(helmet());
 app.use(cors());

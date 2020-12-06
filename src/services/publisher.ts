@@ -27,7 +27,9 @@ export default class Publisher {
       ...user
     }
     //F&F Fire and Forget
-    Publisher.client.publish('user', JSON.stringify(payload));
+    Publisher.client.publish('user', JSON.stringify(payload), () => {
+      console.log('Event sent -', requestId)
+    });
   }
 
 }
