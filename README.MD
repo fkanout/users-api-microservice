@@ -77,6 +77,9 @@ Variable | Default value | Description
 # TBD/To-be-enhanced)
 - Finish the *TODOs* in the codebase.
 - Update and complete the tests to cover more use cases.
+- Add pagination to `/users`
+- Add more advanced logging system e.g. winston 
+- Add APM(App Performance Monitoring).
 - Add Swagger specification to the routes.
 - Add the DB service (singleton class) in UserController with a dependency injection using e.g. http://inversify.io/ (could be overkill and much of boilerplate code for one route?!)
 - Add more complex query possibility (e.g AND, OR )
