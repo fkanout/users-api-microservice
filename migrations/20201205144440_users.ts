@@ -9,3 +9,8 @@ export async function up(knex: Knex): Promise<void> {
     t.string('password', 64);
   });
 }
+
+// eslint-disable-next-line @typescript-eslint/no-empty-function
+export async function down(knex: Knex): Promise<void> {
+
+}
